@@ -1,12 +1,11 @@
 import 'package:fastorder/models/user.dart';
+import 'package:fastorder/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User _userFromFirebaseUser(FirebaseUser user) {
-    print(user.toString());
-    print('hello world');
     return user != null ? User(uid: user.uid, isAnonymous: user.isAnonymous) : null;
   }
 
@@ -42,16 +41,19 @@ class AuthService {
 
 
   // register with email and password
-  Future registerWithCred(String email, String password) async {
+  Future registerWithCred(String email, String password, String phoneNo, String fullName) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      return _userFromFirebaseUser(user);
+      await DatabaseService(uid: user.uid).updateUserData(fullName, phoneNo, 'Female', 100.0);
+
+      return {'data':_userFromFirebaseUser(user), 'error': null};
     } catch (error) {
       print(error.toString());
-      return null;
+      print(error);
+      return {'data': null , 'error': error};
     }
   }
 
