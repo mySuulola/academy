@@ -1,6 +1,6 @@
 import 'package:fastorder/models/user.dart';
 import 'package:fastorder/screens/authenticate/authenticate.dart';
-import 'package:fastorder/screens/home/home.dart';
+import 'package:fastorder/shared/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class Wrapper extends StatelessWidget {
     if(user == null) {
       return Authenticate();
     }else{
-      return Home();
+      return MainMenu();
     }
   }
 }
