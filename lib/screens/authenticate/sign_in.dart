@@ -1,6 +1,6 @@
-import 'package:fastorder/services/auth.dart';
-import 'package:fastorder/shared/constants.dart';
-import 'package:fastorder/shared/loading.dart';
+import 'package:academy/services/auth.dart';
+import 'package:academy/shared/constants.dart';
+import 'package:academy/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -44,80 +44,98 @@ class _SignInState extends State<SignIn> {
               ],
             ),
             body: Container(
-              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-              child: Form(
-                  key: _formKey,
-                  child: Column(children: <Widget>[
-                    Text(
-                      error,
-                      style:
-                          TextStyle(color: Colors.tealAccent, fontSize: 14.0),
-                    ),
-                    TextFormField(
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Email'),
-                      validator: (value) =>
-                          value.isEmpty ? 'Enter an email' : null,
-                      onChanged: (val) {
-                        setState(() => email = val);
-                      },
-                    ),
-                    SizedBox(height: 20.0),
-                    TextFormField(
-                      obscureText: true,
-                      validator: (val) => val.length < 6
-                          ? 'Password must be at least 6 characters'
-                          : null,
-                      decoration:
-                          textInputDecoration.copyWith(hintText: 'Password'),
-                      onChanged: (val) {
-                        setState(() => password = val);
-                      },
-                    ),
-                    SizedBox(height: 20.0),
-                    RaisedButton(
-                        color: Colors.pink[400],
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(color: Colors.white),
+              child: SingleChildScrollView(
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                  child: Form(
+                      key: _formKey,
+                      child: Column(children: <Widget>[
+                        Center(
+                          child: Image.asset(
+                          'assets/note.png',
+                          height: 50.0,
+                          width: 50.0,
+                        )),
+                        Text(
+                          error ?? "Log in to your existing account",
+                          style: TextStyle(
+                              color: Colors.tealAccent, fontSize: 14.0),
                         ),
-                        onPressed: () async {
-                          if (_formKey.currentState.validate()) {
-                            setState(() {
-                              loading = true;
-                            });
-                            dynamic result = await _authService.signInWithCred(
-                                email, password);
+                        TextFormField(
+                          decoration:
+                              textInputDecoration.copyWith(hintText: 'Email'),
+                          validator: (value) =>
+                              value.isEmpty ? 'Enter an email' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                          obscureText: true,
+                          validator: (val) => val.length < 6
+                              ? 'Password must be at least 6 characters'
+                              : null,
+                          decoration: textInputDecoration.copyWith(
+                              hintText: 'Password'),
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
+                        ),
+                        GestureDetector(
+                          child: Text(
+                          error ?? "Log in to your existing account",
+                          style: TextStyle(
+                              color: Colors.tealAccent, fontSize: 14.0),
+                        ),
+                        onTap: () {},
+                        ),
+                        SizedBox(height: 20.0),
+                        RaisedButton(
+                            color: Colors.pink[400],
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState.validate()) {
+                                setState(() {
+                                  loading = true;
+                                });
+                                dynamic result = await _authService
+                                    .signInWithCred(email, password);
+                                if (result == null) {
+                                  setState(() {
+                                    loading = false;
+                                    error =
+                                        'Registration failed. Please try again';
+                                  });
+                                }
+                              }
+                            }),
+                        SizedBox(height: 20.0),
+                        RaisedButton(
+                          child: Text('Sign in as anon'),
+                          onPressed: () async {
+                            dynamic result = await _authService.signInAnon();
                             if (result == null) {
-                              setState(() {
-                                loading = false;
-                                error = 'Registration failed. Please try again';
-                              });
+                              print('error signing in');
                             }
-                          }
-                        }),
-                    SizedBox(height: 20.0),
-                    RaisedButton(
-                      child: Text('Sign in as anon'),
-                      onPressed: () async {
-                        dynamic result = await _authService.signInAnon();
-                        if (result == null) {
-                          print('error signing in');
-                        }
-                      },
-                    ),
-                    SizedBox(height: 20.0),
-                    RaisedButton(
-                      color: Colors.pink[200],
-                      child: Text(
-                        'Google Authentication',
-                        style: TextStyle(
-                          color: Colors.white70
+                          },
                         ),
+                        SizedBox(height: 20.0),
+                        RaisedButton(
+                          color: Colors.pink[200],
+                          child: Text(
+                            'Google Authentication',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                          onPressed: () async {},
                         ),
-                      onPressed: () async {},
-                    ),
-                  ])),
+                      ])),
+                ),
+              ),
             ),
           );
   }

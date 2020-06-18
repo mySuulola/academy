@@ -1,11 +1,11 @@
-import 'package:fastorder/models/menu_item.dart';
-import 'package:fastorder/screens/authenticate/sign_in.dart';
-import 'package:fastorder/screens/course/course_home.dart';
-import 'package:fastorder/screens/dictionary/dictionary_home.dart';
-import 'package:fastorder/screens/home/home.dart';
-import 'package:fastorder/screens/home/settings_form.dart';
-import 'package:fastorder/screens/note/note_home.dart';
-import 'package:fastorder/services/auth.dart';
+import 'package:academy/models/menu_item.dart';
+import 'package:academy/screens/authenticate/sign_in.dart';
+import 'package:academy/screens/course/course_home.dart';
+import 'package:academy/screens/dictionary/dictionary_home.dart';
+import 'package:academy/screens/home/home.dart';
+import 'package:academy/screens/home/settings_form.dart';
+import 'package:academy/screens/note/note_home.dart';
+import 'package:academy/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatefulWidget {
@@ -24,7 +24,6 @@ class _MainMenuState extends State<MainMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _menuItems = createMenuItems();
     _selectedMenuItem = _menuItems.first;

@@ -1,5 +1,5 @@
-import 'package:fastorder/models/user.dart';
-import 'package:fastorder/services/database.dart';
+import 'package:academy/models/user.dart';
+import 'package:academy/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {

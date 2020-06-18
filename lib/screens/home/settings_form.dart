@@ -1,9 +1,9 @@
-import 'package:fastorder/models/user.dart';
-import 'package:fastorder/models/userData.dart';
-import 'package:fastorder/services/database.dart';
+import 'package:academy/models/user.dart';
+import 'package:academy/models/userData.dart';
+import 'package:academy/services/database.dart';
 import 'package:flutter/material.dart';
-import 'package:fastorder/shared/constants.dart';
-import 'package:fastorder/shared/loading.dart';
+import 'package:academy/shared/constants.dart';
+import 'package:academy/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class SettingsForm extends StatefulWidget {

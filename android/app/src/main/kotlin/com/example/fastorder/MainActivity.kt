@@ -1,4 +1,4 @@
-package com.example.fastorder
+package com.example.academy
 
 import io.flutter.embedding.android.FlutterActivity
 

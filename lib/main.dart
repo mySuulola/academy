@@ -1,6 +1,6 @@
-import 'package:fastorder/models/user.dart';
-import 'package:fastorder/screens/wrapper.dart';
-import 'package:fastorder/services/auth.dart';
+import 'package:academy/models/user.dart';
+import 'package:academy/screens/wrapper.dart';
+import 'package:academy/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,6 @@
-import 'dart:convert';
-
-import 'package:fastorder/services/auth.dart';
-import 'package:fastorder/shared/constants.dart';
-import 'package:fastorder/shared/loading.dart';
+import 'package:academy/services/auth.dart';
+import 'package:academy/shared/constants.dart';
+import 'package:academy/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {

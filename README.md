@@ -1,4 +1,4 @@
-# fastorder
+# Academy
 
 A new Flutter project.
 

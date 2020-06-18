@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fastorder/models/userData.dart';
+import 'package:academy/models/userData.dart';
 import 'package:meta/meta.dart';
 
 class DatabaseService {
