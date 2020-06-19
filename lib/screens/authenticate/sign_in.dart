@@ -1,12 +1,10 @@
+import 'package:academy/screens/authenticate/register.dart';
 import 'package:academy/services/auth.dart';
 import 'package:academy/shared/constants.dart';
 import 'package:academy/shared/loading.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
-  SignIn({this.toggleView});
-
   @override
   _SignInState createState() => _SignInState();
 }
@@ -25,24 +23,7 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor: Colors.brown[100],
-            appBar: AppBar(
-              backgroundColor: Colors.brown[400],
-              elevation: 0.0,
-              title: Text('Reflector Academy'),
-              actions: <Widget>[
-                FlatButton.icon(
-                    onPressed: () => widget.toggleView(),
-                    icon: Icon(
-                      Icons.person,
-                      color: Colors.white70,
-                    ),
-                    label: Text(
-                      'Register',
-                      style: TextStyle(color: Colors.white70),
-                    ))
-              ],
-            ),
+            backgroundColor: Colors.white,
             body: Container(
               child: SingleChildScrollView(
                 child: Container(
@@ -52,87 +33,196 @@ class _SignInState extends State<SignIn> {
                       key: _formKey,
                       child: Column(children: <Widget>[
                         Center(
-                          child: Image.asset(
-                          'assets/note.png',
-                          height: 50.0,
-                          width: 50.0,
+                            child: Image.asset(
+                          'assets/login.png',
+                          height: 200.0,
+                          // width: 50.0,
                         )),
                         Text(
-                          error ?? "Log in to your existing account",
+                          "Welcome back!",
                           style: TextStyle(
-                              color: Colors.tealAccent, fontSize: 14.0),
+                              fontWeight: FontWeight.bold, fontSize: 20.0),
                         ),
-                        TextFormField(
-                          decoration:
-                              textInputDecoration.copyWith(hintText: 'Email'),
-                          validator: (value) =>
-                              value.isEmpty ? 'Enter an email' : null,
-                          onChanged: (val) {
-                            setState(() => email = val);
-                          },
+                        Text(
+                          error == ''
+                              ? "Log in to your existing account"
+                              : error,
+                          style:
+                              TextStyle(color: Colors.black26, fontSize: 14.0),
                         ),
                         SizedBox(height: 20.0),
-                        TextFormField(
-                          obscureText: true,
-                          validator: (val) => val.length < 6
-                              ? 'Password must be at least 6 characters'
-                              : null,
-                          decoration: textInputDecoration.copyWith(
-                              hintText: 'Password'),
-                          onChanged: (val) {
-                            setState(() => password = val);
-                          },
-                        ),
-                        GestureDetector(
-                          child: Text(
-                          error ?? "Log in to your existing account",
-                          style: TextStyle(
-                              color: Colors.tealAccent, fontSize: 14.0),
-                        ),
-                        onTap: () {},
-                        ),
-                        SizedBox(height: 20.0),
-                        RaisedButton(
-                            color: Colors.pink[400],
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(color: Colors.white),
+                        Material(
+                          elevation: 4.0,
+                          shadowColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 0.0, 51.0, 0.0),
+                            child: TextFormField(
+                              decoration: textInputDecorationLogin.copyWith(
+                                hintText: 'Email',
+                                icon: Icon(Icons.people),
+                              ),
+                              validator: (value) =>
+                                  value.isEmpty ? 'Enter an email' : null,
+                              onChanged: (val) {
+                                setState(() => email = val);
+                              },
                             ),
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                setState(() {
-                                  loading = true;
-                                });
-                                dynamic result = await _authService
-                                    .signInWithCred(email, password);
-                                if (result == null) {
-                                  setState(() {
-                                    loading = false;
-                                    error =
-                                        'Registration failed. Please try again';
-                                  });
-                                }
-                              }
-                            }),
-                        SizedBox(height: 20.0),
-                        RaisedButton(
-                          child: Text('Sign in as anon'),
-                          onPressed: () async {
-                            dynamic result = await _authService.signInAnon();
-                            if (result == null) {
-                              print('error signing in');
-                            }
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        RaisedButton(
-                          color: Colors.pink[200],
-                          child: Text(
-                            'Google Authentication',
-                            style: TextStyle(color: Colors.white70),
                           ),
-                          onPressed: () async {},
                         ),
+                        SizedBox(height: 20.0),
+                        Material(
+                          elevation: 4.0,
+                          shadowColor: Colors.grey,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(10.0, 0.0, 51.0, 0.0),
+                            child: TextFormField(
+                              obscureText: true,
+                              validator: (val) => val.length < 6
+                                  ? 'Minimum of 6 characters'
+                                  : null,
+                              decoration: textInputDecorationLogin.copyWith(
+                                  hintText: 'Password',
+                                  icon: new Icon(Icons.lock,
+                                      color: Color(0xff224597))),
+                              onChanged: (val) {
+                                setState(() => password = val);
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: GestureDetector(
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        ButtonTheme(
+                          minWidth: 130.0,
+                          height: 40.0,
+                          child: RaisedButton(
+                              color: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  setState(() {
+                                    loading = true;
+                                  });
+                                  dynamic result = await _authService
+                                      .signInWithCred(email, password);
+                                  if (result['data'] == null) {
+                                    setState(() {
+                                      loading = false;
+                                      error = result['error'];
+                                    });
+                                  }
+                                }
+                              }),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text(
+                          "Or connect using",
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 4,
+                              child: RaisedButton(
+                                color: Colors.red,
+                                child: Text(
+                                  'Google',
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                                onPressed: () async {
+                                  // signInWithGoogle
+                                  dynamic result = await _authService
+                                      .signInWithGoogle();
+                                  if (result['data'] == null) {
+                                    setState(() {
+                                      loading = false;
+                                      error = result['error'];
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                            // SizedBox(
+                            //   width: MediaQuery.of(context).size.width / 4,
+                            //   child: RaisedButton(
+                            //     color: Colors.blue,
+                            //     child: Text(
+                            //       'Facebook',
+                            //       style: TextStyle(
+                            //           color: Colors.white70, fontSize: 12.0),
+                            //     ),
+                            //     onPressed: () async {},
+                            //   ),
+                            // ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 4,
+                              child: RaisedButton(
+                                child: Text('Anon login', style: TextStyle(fontSize: 10.0)),
+                                onPressed: () async {
+                                  dynamic result =
+                                      await _authService.signInAnon();
+                                  if (result == null) {
+                                    setState(() {
+                                      error = result['error'];
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 60.0),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Don't have an account? "),
+                              GestureDetector(
+                                onTap: () => Navigator.of(context).push(
+                                        MaterialPageRoute(builder: ((context) {
+                                      return Register();
+                                    }))),
+                                child: Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ])),
                 ),
               ),

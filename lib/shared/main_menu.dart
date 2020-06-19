@@ -4,7 +4,7 @@ import 'package:academy/screens/course/course_home.dart';
 import 'package:academy/screens/dictionary/dictionary_home.dart';
 import 'package:academy/screens/home/home.dart';
 import 'package:academy/screens/home/settings_form.dart';
-import 'package:academy/screens/note/note_home.dart';
+import 'package:academy/screens/note/note_list.dart';
 import 'package:academy/services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -104,31 +104,28 @@ class _MainMenuState extends State<MainMenu> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-              color: Colors.brown[100],
-            ),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Icon(Icons.tag_faces,size: 50.0),
-                  SizedBox(height: 20.0),
-                  Text(
-                    'Academy',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w200
-                    ),
-                  ),
-                  Text(
-                    'Suulola Oluwaseyi',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w300
-                    ),
-                  ),
-
-                ],
+                color: Colors.white,
               ),
-            ),            
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/profile.png',
+                      height: 80.0,
+                    ),
+                    Text(
+                      'Academy',
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.w200),
+                    ),
+                    Text(
+                      'Learners are Leaders',
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.w300),
+                    ),
+                  ],
+                ),
+              ),
             ),
             // SizedBox(
             //   child: Center(
@@ -158,7 +155,7 @@ class _MainMenuState extends State<MainMenu> {
       new MenuItem(
           'Dashboard', 'assets/dash.png', Colors.black, () => new Home()),
       new MenuItem(
-          'Note', 'assets/note.png', Colors.indigo, () => new NoteHome()),
+          'Note', 'assets/note.png', Colors.indigo, () => new NoteList()),
       new MenuItem('Dictionary', 'assets/dico.png', Colors.black,
           () => new DictionaryHome()),
       new MenuItem('Courses', 'assets/courses.png', Colors.indigo,
