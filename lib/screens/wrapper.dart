@@ -2,7 +2,7 @@ import 'package:academy/models/user.dart';
 import 'package:academy/shared/main_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:splashscreen/splashscreen.dart';
+// import 'package:splashscreen/splashscreen.dart';
 
 import 'authenticate/sign_in.dart';
 import 'home/home.dart';

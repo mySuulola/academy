@@ -156,7 +156,7 @@ class _MainMenuState extends State<MainMenu> {
           'Dashboard', 'assets/dash.png', Colors.black, () => new Home()),
       new MenuItem(
           'Note', 'assets/note.png', Colors.indigo, () => new NoteList()),
-      new MenuItem('Dictionary', 'assets/dico.png', Colors.black,
+      new MenuItem('Dictionary', 'assets/dico.png', Colors.blue,
           () => new DictionaryHome()),
       new MenuItem('Courses', 'assets/courses.png', Colors.indigo,
           () => new CourseHome()),

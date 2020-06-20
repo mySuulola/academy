@@ -26,10 +26,10 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+       return {'data': _userFromFirebaseUser(user), 'error': null};
     } catch (errorMessage) {
       print(errorMessage.toString());
-      return null;
+       return {'data': null, 'error': errorMessage};
     }
   }
 
