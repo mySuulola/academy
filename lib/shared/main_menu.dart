@@ -165,7 +165,7 @@ class _MainMenuState extends State<MainMenu> {
           () => new DictionaryHome()),
       new MenuItem('Courses', 'assets/courses.png', Colors.indigo,
           () => new CourseHome()),
-      new MenuItem('Memory Game', 'assets/courses.png', Colors.blue,
+      new MenuItem('Memory Game', 'assets/game.png', Colors.blue,
           () => new GameHome()),
       new MenuItem('Logout', 'assets/logout.png', Colors.black,
           () async => {await _authService.signOut().then((value) => SignIn())}),
