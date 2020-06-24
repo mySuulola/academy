@@ -48,7 +48,6 @@ class _SettingsFormState extends State<SettingsForm> {
                     print(snapshot.hasData);
                     print(user.uid);
                     if (snapshot.hasData) {
-
                       UserData userData = snapshot.data;
 
                       return Column(
@@ -103,39 +102,46 @@ class _SettingsFormState extends State<SettingsForm> {
                           ),
                           SizedBox(height: 20.0),
                           Slider(
-                              activeColor: Colors.brown[_martialStatus == null ? userData.maritalStatus.round() : _martialStatus.round()],
-                              inactiveColor: Colors.brown[_martialStatus == null ? userData.maritalStatus.round() : _martialStatus.round()],
+                              activeColor: Colors.brown[_martialStatus == null
+                                  ? userData.maritalStatus.round()
+                                  : _martialStatus.round()],
+                              inactiveColor: Colors.brown[_martialStatus == null
+                                  ? userData.maritalStatus.round()
+                                  : _martialStatus.round()],
                               min: 100.0,
                               max: 900.0,
                               value: _martialStatus ?? userData.maritalStatus,
                               divisions: 8,
                               onChanged: (val) =>
-                                  setState(() => _martialStatus = val )),
+                                  setState(() => _martialStatus = val)),
                           SizedBox(height: 5.0),
                           Expanded(
-                            child: RaisedButton(
-                                color: Colors.pink[400],
-                                child: Text(
-                                  'Update',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                onPressed: () async {
-                                  try{
-                                     await DatabaseService(uid: userData.uid)
-                                      .updateUserData(
-                                          _fullName ?? userData.name,
-                                          _phoneNumber ?? userData.phoneNumber,
-                                          _gender ?? userData.gender,
-                                         _martialStatus ?? userData.maritalStatus
-                                      );
+                            child: SizedBox(
+                              height: 50.0,
+                              child: RaisedButton(
+                                  color: Colors.pink[400],
+                                  child: Text(
+                                    'Update',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  onPressed: () async {
+                                    try {
+                                      await DatabaseService(uid: userData.uid)
+                                          .updateUserData(
+                                              _fullName ?? userData.name,
+                                              _phoneNumber ??
+                                                  userData.phoneNumber,
+                                              _gender ?? userData.gender,
+                                              _martialStatus ??
+                                                  userData.maritalStatus);
                                       print('all is good');
-                                  Navigator.pop(context);
-                                  }catch(error) {
-                                    print("Error don happend");
-                                    print(error.toString());
-                                  }
-                               
-                                }),
+                                      Navigator.pop(context);
+                                    } catch (error) {
+                                      print("Error don happend");
+                                      print(error.toString());
+                                    }
+                                  }),
+                            ),
                           ),
                         ],
                       );

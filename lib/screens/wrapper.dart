@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 // import 'package:splashscreen/splashscreen.dart';
 
 import 'authenticate/sign_in.dart';
-import 'home/home.dart';
 
 
 

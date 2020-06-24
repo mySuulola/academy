@@ -2,6 +2,7 @@ import 'package:academy/models/menu_item.dart';
 import 'package:academy/screens/authenticate/sign_in.dart';
 import 'package:academy/screens/course/course_home.dart';
 import 'package:academy/screens/dictionary/dictionary_home.dart';
+import 'package:academy/screens/game/game_home.dart';
 import 'package:academy/screens/home/home.dart';
 import 'package:academy/screens/home/settings_form.dart';
 import 'package:academy/screens/note/note_list.dart';
@@ -9,6 +10,10 @@ import 'package:academy/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatefulWidget {
+  final int widgetIndex;
+
+  const MainMenu({Key key, this.widgetIndex = 0}) : super(key: key);
+
   @override
   _MainMenuState createState() => _MainMenuState();
 }
@@ -26,9 +31,9 @@ class _MainMenuState extends State<MainMenu> {
   void initState() {
     super.initState();
     _menuItems = createMenuItems();
-    _selectedMenuItem = _menuItems.first;
-    _appBarTitle = new Text(_menuItems.first.title);
-    _appBarBackgroundColor = _menuItems.first.color;
+    _selectedMenuItem = _menuItems[widget.widgetIndex];
+    _appBarTitle = new Text(_menuItems[widget.widgetIndex].title);
+    _appBarBackgroundColor = _menuItems[widget.widgetIndex].color;
   }
 
   @override
@@ -153,13 +158,15 @@ class _MainMenuState extends State<MainMenu> {
   List<MenuItem> createMenuItems() {
     final menuItems = [
       new MenuItem(
-          'Dashboard', 'assets/dash.png', Colors.black, () => new Home()),
+          'Dashboard', 'assets/dash.png', Colors.brown, () => new Home()),
       new MenuItem(
           'Note', 'assets/note.png', Colors.indigo, () => new NoteList()),
       new MenuItem('Dictionary', 'assets/dico.png', Colors.blue,
           () => new DictionaryHome()),
       new MenuItem('Courses', 'assets/courses.png', Colors.indigo,
           () => new CourseHome()),
+      new MenuItem('Memory Game', 'assets/courses.png', Colors.blue,
+          () => new GameHome()),
       new MenuItem('Logout', 'assets/logout.png', Colors.black,
           () async => {await _authService.signOut().then((value) => SignIn())}),
     ];

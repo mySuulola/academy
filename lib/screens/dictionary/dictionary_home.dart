@@ -41,7 +41,6 @@ class _DictionaryHomeState extends State<DictionaryHome> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _streamController = StreamController();
     _stream = _streamController.stream;
