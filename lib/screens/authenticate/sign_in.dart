@@ -165,8 +165,9 @@ class _SignInState extends State<SignIn> {
                                     ),
                                     onPressed: () async {
                                       // signInWithGoogle
-                                      dynamic result =
-                                          await _authService.signInWithGoogle();
+                                      dynamic result =  await _authService.signInAnon();
+                                          // await _authService.signInWithGoogle();
+
                                       if (result['data'] == null) {
                                         setState(() {
                                           loading = false;

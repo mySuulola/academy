@@ -99,7 +99,7 @@ class _MainMenuState extends State<MainMenu> {
                 color: Colors.white70,
               ),
               label: Text(
-                'logout',
+                'Logout',
                 style: TextStyle(color: Colors.white70),
               ))
         ],

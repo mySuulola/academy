@@ -1,4 +1,3 @@
-import 'package:academy/models/news.dart';
 import 'package:academy/models/user.dart';
 import 'package:academy/services/database.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     allNews = fetchNews();
   }

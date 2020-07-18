@@ -23,6 +23,9 @@ class _GameHomeState extends State<GameHome> {
   Timer timer;
 
   startTimer() {
+    if (!mounted) {
+      return; // Just do nothing if the widget is disposed.
+    }
     timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         time = time + 1;
@@ -45,6 +48,9 @@ class _GameHomeState extends State<GameHome> {
     data.shuffle();
   }
 
+
+  
+
   showResult() {
     showDialog(
         context: context,
@@ -56,8 +62,10 @@ class _GameHomeState extends State<GameHome> {
                 FlatButton(
                     onPressed: () {
                       level *= 2;
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => MainMenu(widgetIndex: 4)));
+                      Navigator.of(context).pop();
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      //     builder: (context) =>  MainMenu(widgetIndex: 4)
+                      //     ));
                     },
                     child: Text('Try Again'))
               ],

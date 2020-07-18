@@ -9,7 +9,7 @@ class _CourseHomeState extends State<CourseHome> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('Courses'),      
+      child: Center(child: Text('Courses')),
     );
   }
 }

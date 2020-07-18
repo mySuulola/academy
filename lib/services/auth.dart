@@ -26,10 +26,10 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
-       return {'data': _userFromFirebaseUser(user), 'error': null};
+      return {'data': _userFromFirebaseUser(user), 'error': null};
     } catch (errorMessage) {
       print(errorMessage.toString());
-       return {'data': null, 'error': errorMessage};
+      return {'data': null, 'error': errorMessage};
     }
   }
 
@@ -94,34 +94,34 @@ class AuthService {
           await googleSignIn.signIn();
       print('b');
       print(googleSignInAccount.toString());
-      // final GoogleSignInAuthentication googleSignInAuthentication =
-      //     await googleSignInAccount.authentication;
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-      // print("1");
+      print("1");
 
-      // final AuthCredential credential = GoogleAuthProvider.getCredential(
-      //   accessToken: googleSignInAuthentication.accessToken,
-      //   idToken: googleSignInAuthentication.idToken,
-      // );
-      // print("2");
+      final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      print("2");
 
-      // final AuthResult authResult =
-      //     await _auth.signInWithCredential(credential);
-      // print("3");
-      // final FirebaseUser user = authResult.user;
-      // print("4");
+      final AuthResult authResult =
+          await _auth.signInWithCredential(credential);
+      print("3");
+      final FirebaseUser user = authResult.user;
+      print("4");
 
-      // assert(!user.isAnonymous);
-      // assert(await user.getIdToken() != null);
-      // print("5");
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+      print("5");
 
-      // final FirebaseUser currentUser = await _auth.currentUser();
-      // print("6");
-      // assert(user.uid == currentUser.uid);
+      final FirebaseUser currentUser = await _auth.currentUser();
+      print("6");
+      assert(user.uid == currentUser.uid);
 
-      // print(user);
-      // print("7");
-      return {'data': null, 'error': null};
+      print(user);
+      print("7");
+      return {'data': _userFromFirebaseUser(user), 'error': null};
     } catch (error) {
       print(error.toString());
       return {'data': null, 'error': "Failed Authentication. Please try later"};
